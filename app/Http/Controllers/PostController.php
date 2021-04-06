@@ -113,7 +113,7 @@ class PostController extends Controller
 
 	protected function _userId()
 	{
-		return 10;
+		return auth('api')->user()->id;
 	}
 
 	protected function _post($id)

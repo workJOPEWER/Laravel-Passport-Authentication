@@ -1,20 +1,31 @@
-+--------+-----------+-------------------------+-------------------------+---------------------------------------------------------------------------+------------+
-| Domain | Method    | URI                     | Name                    | Action                                                                    | Middleware |
-+--------+-----------+-------------------------+-------------------------+---------------------------------------------------------------------------+------------+
-|        | GET|HEAD  | /                       |                         | Closure                                                                   | web        |
-|        | GET|HEAD  | api/all-posts           |                         | App\Http\Controllers\PostController@allPosts                              | api        |
-|        | POST      | api/posts               | posts.store             | App\Http\Controllers\PostController@store                                 | api        |
-|        | GET|HEAD  | api/posts               | posts.index             | App\Http\Controllers\PostController@index                                 | api        |
-|        | GET|HEAD  | api/posts/create        | posts.create            | App\Http\Controllers\PostController@create                                | api        |
-|        | GET|HEAD  | api/posts/{post}        | posts.show              | App\Http\Controllers\PostController@show                                  | api        |
-|        | PUT|PATCH | api/posts/{post}        | posts.update            | App\Http\Controllers\PostController@update                                | api        |
-|        | DELETE    | api/posts/{post}        | posts.destroy           | App\Http\Controllers\PostController@destroy                               | api        |
-|        | GET|HEAD  | api/posts/{post}/edit   | posts.edit              | App\Http\Controllers\PostController@edit                                  | api        |
-|        | GET|HEAD  | api/user                |                         | Closure                                                                   | api        |
-|        |           |                         |                         |                                                                           | auth:api   |
-|        | POST      | oauth/token             | passport.token          | Laravel\Passport\Http\Controllers\AccessTokenController@issueToken        | throttle   |
-|        | GET|HEAD  | oauth/tokens            | passport.tokens.index   | Laravel\Passport\Http\Controllers\AuthorizedAccessTokenController@forUser | web        |
-|        |           |                         |                         |                                                                           | auth       |
-|        | DELETE    | oauth/tokens/{token_id} | passport.tokens.destroy | Laravel\Passport\Http\Controllers\AuthorizedAccessTokenController@destroy | web        |
-|        |           |                         |                         |                                                                           | auth       |
-+--------+-----------+-------------------------+-------------------------+---------------------------------------------------------------------------+------------+
++--------+-----------+-------------------------+-----------------------------+---------------------------------------------------------------------------+------------+
+| Domain | Method    | URI                     | Name                        | Action                                                                    | Middleware |
++--------+-----------+-------------------------+-----------------------------+---------------------------------------------------------------------------+------------+
+|        | GET|HEAD  | /                       | generated::YkgkFt5IMx7WHc4K | Closure                                                                   | web        |
+|        | GET|HEAD  | api/all-posts           | generated::JcldtdgmPbeZb47F | App\Http\Controllers\PostController@allPosts                              | api        |
+|        | POST      | api/login               | login                       | App\Http\Controllers\AuthController@login                                 | api        |
+|        | POST      | api/logout              | logout                      | App\Http\Controllers\AuthController@logout                                | api        |
+|        |           |                         |                             |                                                                           | auth:api   |
+|        | GET|HEAD  | api/posts               | posts.index                 | App\Http\Controllers\PostController@index                                 | api        |
+|        |           |                         |                             |                                                                           | auth:api   |
+|        | POST      | api/posts               | posts.store                 | App\Http\Controllers\PostController@store                                 | api        |
+|        |           |                         |                             |                                                                           | auth:api   |
+|        | GET|HEAD  | api/posts/create        | posts.create                | App\Http\Controllers\PostController@create                                | api        |
+|        |           |                         |                             |                                                                           | auth:api   |
+|        | GET|HEAD  | api/posts/{post}        | posts.show                  | App\Http\Controllers\PostController@show                                  | api        |
+|        |           |                         |                             |                                                                           | auth:api   |
+|        | PUT|PATCH | api/posts/{post}        | posts.update                | App\Http\Controllers\PostController@update                                | api        |
+|        |           |                         |                             |                                                                           | auth:api   |
+|        | DELETE    | api/posts/{post}        | posts.destroy               | App\Http\Controllers\PostController@destroy                               | api        |
+|        |           |                         |                             |                                                                           | auth:api   |
+|        | GET|HEAD  | api/posts/{post}/edit   | posts.edit                  | App\Http\Controllers\PostController@edit                                  | api        |
+|        |           |                         |                             |                                                                           | auth:api   |
+|        | POST      | api/register            | register                    | App\Http\Controllers\AuthController@register                              | api        |
+|        | GET|HEAD  | api/user                | generated::A9c8eblpFPUTrJV1 | Closure                                                                   | api        |
+|        |           |                         |                             |                                                                           | auth:api   |
+|        | POST      | oauth/token             | passport.token              | Laravel\Passport\Http\Controllers\AccessTokenController@issueToken        | throttle   |
+|        | GET|HEAD  | oauth/tokens            | passport.tokens.index       | Laravel\Passport\Http\Controllers\AuthorizedAccessTokenController@forUser | web        |
+|        |           |                         |                             |                                                                           | auth       |
+|        | DELETE    | oauth/tokens/{token_id} | passport.tokens.destroy     | Laravel\Passport\Http\Controllers\AuthorizedAccessTokenController@destroy | web        |
+|        |           |                         |                             |                                                                           | auth       |
++--------+-----------+-------------------------+-----------------------------+---------------------------------------------------------------------------+------------+
