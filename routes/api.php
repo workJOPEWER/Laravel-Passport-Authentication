@@ -27,3 +27,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //});
 
 Route::resource('posts', \App\Http\Controllers\PostController::class);
+Route::get('all-posts', [\App\Http\Controllers\PostController::class, 'allPosts']);

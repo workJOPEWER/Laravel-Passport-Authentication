@@ -2,20 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Http\Resources\PostResource;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+	public function allPosts()
+	{
+		$posts = Post::all();
+
+		if ($posts) {
+			return PostResource::collection( $posts );
+		}
+
+		return response()->json( 'No post found' );
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
 	{
-		$userId = 3;
+		$userId = $this->_userId();
 		$posts = Post::where( 'user_id', $userId )->get();
 
 		if ($posts) {
@@ -26,20 +37,10 @@ class PostController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
+	 * @return PostResource
 	 */
 	public function store(Request $request)
 	{
@@ -61,58 +62,53 @@ class PostController extends Controller
 	 * Display the specified resource.
 	 *
 	 * @param  \App\Models\Post $post
-	 * @return \Illuminate\Http\Response
+	 * @return PostResource
 	 */
 	public function show(Post $post)
 	{
 		if ($post) {
-			return new PostResource($post);
+			return new PostResource( $post );
 		}
 
-		return response()->json('No post found for you');
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  \App\Models\Post $post
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit(Post $post)
-	{
-		//
+		return response()->json( 'No post found for you' );
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request $request
-	 * @param  \App\Models\Post $post
-	 * @return \Illuminate\Http\Response
+	 * @return PostResource
 	 */
 	public function update(Request $request, $id)
 	{
-		$post = $this->_post($id);
+		$post = $this->_post( $id );
 
 		if ($post) {
 			$post->title = $request->title;
 			$post->detail = $request->detail;
 			$post->save();
-			return new PostResource($post);
+			return new PostResource( $post );
 		}
 
-		return response()->json('No post found for you');
+		return response()->json( 'No post found for you' );
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  \App\Models\Post $post
-	 * @return \Illuminate\Http\Response
+	 * @param $id
+	 * @return PostResource
 	 */
-	public function destroy(Post $post)
+	public function destroy($id)
 	{
-		//
+		$post = $this->_post( $id );
+
+		if ($post) {
+			$post->delete();
+			return new PostResource( $post );
+		}
+
+		return response()->json( 'No post found for you' );
 	}
 
 	protected function _userId()
@@ -123,7 +119,7 @@ class PostController extends Controller
 	protected function _post($id)
 	{
 		$userId = $this->_userId();
-		$post = Post::where('user_id', $userId)->where('id', $id)->first();
+		$post = Post::where( 'user_id', $userId )->where( 'id', $id )->first();
 		return $post;
 	}
 }
