@@ -7,23 +7,24 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-1. Clone this repo
+<h4>Clone this repo</h4>
 
-2. Install composer packages
+<h4>Install composer packages</h4>
+$ composer install
 
-3. Create and setup .env file
+<h4>Create and setup .env file</h4>
 make a copy of .env.example and rename to .env
 $ copy .env.example .env
 $ php artisan key:generate
 put database credentials in .env file
 
-4. Migrate and insert records
+<h4> Migrate and insert records</h4>
 $ php artisan migrate
 $ php artisan tinker
 User::factory()->count(10)->create();
 \App\Models\Post::factory()->count(100)->create();
 
-5.Generate secure access tokens
+<h4>Generate secure access tokens</h4>
 $ php artisan passport:install
 put passport client login endpoint, id and secret in .env file
 PASSPORT_LOGIN_ENDPOINT=""
